@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="사람과 문제를 연결해 더 나은 경험을 만드는 김민준의 자기소개 페이지" />
+  <title>김민준 | 자기소개</title>
+  <style>
+    :root {
+      --ink: #17201d;
+      --muted: #65706c;
+      --paper: #f4f1e9;
+      --card: rgba(255, 255, 255, 0.68);
+      --line: rgba(23, 32, 29, 0.13);
+      --accent: #ff5c35;
+      --accent-soft: #ffd8ca;
+      --green: #123f34;
+      --shadow: 0 24px 80px rgba(31, 54, 46, 0.1);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, rgba(255, 125, 74, 0.18), transparent 28rem),
+        radial-gradient(circle at 95% 55%, rgba(40, 105, 86, 0.12), transparent 35rem),
+        var(--paper);
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+    .logo {
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: 1.18rem;
+    }
+    .logo i { color: var(--accent); font-style: normal; }
+    .nav-links { display: flex; align-items: center; gap: 32px; font-size: 0.92rem; font-weight: 700; }
+    .nav-links a { opacity: 0.72; transition: 0.2s ease; }
+    .nav-links a:hover { opacity: 1; color: var(--accent); }
+    .menu-btn { display: none; background: none; border: 0; cursor: pointer; font-size: 1.4rem; }
+
+    .hero {
+      min-height: calc(100vh - 78px);
+      display: grid;
+      grid-template-columns: 1.18fr 0.82fr;
+      align-items: center;
+      gap: 80px;
+      padding: 72px 0 110px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 22px;
+      color: var(--green);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    h1 {
+      margin: 0;
+      font-size: clamp(3.3rem, 7.3vw, 7.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.075em;
+      font-weight: 900;
+    }
+    h1 .stroke { color: transparent; -webkit-text-stroke: 1.8px var(--ink); }
+    .hero-copy { max-width: 620px; margin: 32px 0 0; color: var(--muted); font-size: 1.12rem; }
+    .hero-copy strong { color: var(--ink); }
+    .cta-row { display: flex; gap: 12px; margin-top: 38px; flex-wrap: wrap; }
+    .btn {
+      min-height: 52px;
+      padding: 0 23px;
+      border: 1px solid var(--ink);
+      border-radius: 100px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(20, 43, 36, 0.12); }
+    .btn.primary { background: var(--ink); color: white; }
+    .btn.secondary { background: rgba(255,255,255,0.25); }
+
+    .portrait-card {
+      position: relative;
+      aspect-ratio: 0.84;
+      border-radius: 44% 44% 32px 32px;
+      overflow: hidden;
+      background: var(--green);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+    .portrait-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 67% 24%, var(--accent-soft) 0 12%, transparent 12.3%),
+        radial-gradient(circle at 48% 70%, #2c6f5c 0 21%, transparent 21.3%),
+        linear-gradient(145deg, transparent 0 38%, rgba(255,255,255,0.08) 38% 39%, transparent 39%);
+      z-index: -1;
+    }
+    .portrait-monogram {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #f7f2e8;
+      font-size: clamp(6rem, 13vw, 11rem);
+      font-weight: 900;
+      letter-spacing: -0.12em;
+      transform: translateX(-0.04em);
+    }
+    .status {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 18px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 18px;
+      color: white;
+      background: rgba(9, 39, 31, 0.58);
+      backdrop-filter: blur(13px);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+    .status-dot { width: 9px; height: 9px; border-radius: 50%; background: #7af09c; box-shadow: 0 0 0 5px rgba(122,240,156,0.12); }
+
+    section { padding: 120px 0; }
+    .section-head { display: grid; grid-template-columns: 0.7fr 1.3fr; gap: 40px; margin-bottom: 56px; }
+    .section-index { color: var(--accent); font-size: 0.78rem; font-weight: 900; letter-spacing: 0.14em; }
+    h2 { margin: 0; font-size: clamp(2.2rem, 4.5vw, 4.6rem); line-height: 1.06; letter-spacing: -0.055em; }
+    .lead { max-width: 680px; margin: 22px 0 0; color: var(--muted); font-size: 1.06rem; }
+
+    .values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .value-card {
+      min-height: 300px;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s, background 0.25s;
+    }
+    .value-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.9); }
+    .value-no { font-size: 0.8rem; color: var(--accent); font-weight: 900; }
+    .value-icon { margin: auto 0 30px; font-size: 2.2rem; }
+    .value-card h3 { margin: 0 0 10px; font-size: 1.35rem; letter-spacing: -0.03em; }
+    .value-card p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+
+    .story-panel {
+      padding: clamp(28px, 6vw, 72px);
+      border-radius: 40px;
+      background: var(--green);
+      color: #f9f5eb;
+      position: relative;
+      overflow: hidden;
+    }
+    .story-panel::after {
+      content: "“";
+      position: absolute;
+      right: 1.5%;
+      top: -26%;
+      font: 900 28rem Georgia, serif;
+      color: rgba(255,255,255,0.045);
+      pointer-events: none;
+    }
+    .timeline { margin-top: 62px; position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 112px; top: 8px; bottom: 8px; width: 1px; background: rgba(255,255,255,0.2); }
+    .timeline-item { display: grid; grid-template-columns: 86px 1fr; gap: 55px; position: relative; padding-bottom: 45px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before { content: ""; position: absolute; left: 108px; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 7px rgba(255,92,53,0.18); }
+    .year { font-size: 0.82rem; font-weight: 900; color: #9dd1bf; letter-spacing: 0.08em; }
+    .timeline-item h3 { margin: -6px 0 7px; font-size: 1.25rem; }
+    .timeline-item p { margin: 0; color: rgba(255,255,255,0.62); font-size: 0.94rem; }
+
+    .skills { display: flex; flex-wrap: wrap; gap: 12px; }
+    .skill {
+      padding: 13px 19px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: rgba(255,255,255,0.42);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .contact { padding-bottom: 46px; }
+    .contact-box {
+      padding: clamp(34px, 7vw, 86px);
+      border-radius: 38px;
+      background: var(--accent);
+      color: #fff8f3;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-box::before, .contact-box::after { content: ""; position: absolute; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; }
+    .contact-box::before { width: 330px; height: 330px; left: -190px; top: -160px; }
+    .contact-box::after { width: 230px; height: 230px; right: -110px; bottom: -120px; }
+    .contact-box h2 { max-width: 760px; margin: 0 auto 18px; }
+    .contact-box p { margin: 0 auto 30px; max-width: 560px; color: rgba(255,255,255,0.78); }
+    .contact-box .btn { border-color: white; background: white; color: var(--accent); }
+    footer { padding: 28px 0 40px; display: flex; justify-content: space-between; color: var(--muted); font-size: 0.8rem; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 840px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(244,241,233,0.96);
+        box-shadow: var(--shadow);
+        flex-direction: column;
+      }
+      .nav-links.open { display: flex; }
+      .menu-btn { display: block; }
+      .hero { grid-template-columns: 1fr; gap: 54px; padding-top: 54px; }
+      .hero-copy { font-size: 1rem; }
+      .portrait-card { max-width: 520px; width: 100%; justify-self: center; aspect-ratio: 1 / 0.92; border-radius: 200px 200px 28px 28px; }
+      .section-head { grid-template-columns: 1fr; gap: 15px; }
+      .values { grid-template-columns: 1fr; }
+      .value-card { min-height: 240px; }
+      section { padding: 88px 0; }
+    }
+
+    @media (max-width: 520px) {
+      .wrap { width: min(100% - 26px, 1180px); }
+      .nav { height: 66px; }
+      .hero { min-height: auto; padding: 52px 0 80px; }
+      h1 { font-size: clamp(3rem, 16vw, 4.7rem); }
+      .cta-row { flex-direction: column; }
+      .btn { width: 100%; }
+      .timeline::before { left: 7px; }
+      .timeline-item { grid-template-columns: 1fr; gap: 9px; padding-left: 31px; }
+      .timeline-item::before { left: 3px; }
+      .story-panel { border-radius: 28px; }
+      footer { flex-direction: column; gap: 6px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav" aria-label="주요 메뉴">
+      <a class="logo" href="#top">MINJUN<i>.</i></a>
+      <button class="menu-btn" type="button" aria-label="메뉴 열기" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="#about">소개</a>
+        <a href="#story">경험</a>
+        <a href="#skills">역량</a>
+        <a href="#contact">연락하기</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-content reveal">
+        <div class="eyebrow">Hello, I’m Minjun</div>
+        <h1>문제를 발견하고<br><span class="stroke">경험을 만듭니다.</span></h1>
+        <p class="hero-copy">
+          안녕하세요, <strong>김민준</strong>입니다. 사람의 목소리에서 문제를 찾고,
+          아이디어를 실행 가능한 결과로 바꾸는 기획자입니다.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#about">저에 대해 알아보기 <span>↓</span></a>
+          <a class="btn secondary" href="mailto:hello@example.com">이메일 보내기 <span>↗</span></a>
+        </div>
+      </div>
+
+      <div class="portrait-card reveal" aria-label="김민준 이니셜 그래픽">
+        <div class="portrait-monogram">MJ</div>
+        <div class="status"><span class="status-dot"></span> 새로운 기회와 즐거운 협업을 기다리고 있어요</div>
+      </div>
+    </section>
+
+    <section id="about" class="wrap reveal">
+      <div class="section-head">
+        <div class="section-index">01 / ABOUT ME</div>
+        <div>
+          <h2>호기심은 깊게,<br>실행은 빠르게.</h2>
+          <p class="lead">복잡한 상황을 명확하게 정리하고, 함께 일하는 사람들이 같은 목표를 바라보게 만드는 일을 좋아합니다. 작은 디테일까지 놓치지 않되, 결국 중요한 것은 실제로 움직이는 결과라고 믿습니다.</p>
+        </div>
+      </div>
+      <div class="values">
+        <article class="value-card">
+          <span class="value-no">01</span><span class="value-icon">◉</span>
+          <h3>문제의 본질을 봅니다</h3>
+          <p>표면적인 현상보다 ‘왜’에 집중해 진짜 해결해야 할 문제를 찾아냅니다.</p>
+        </article>
+        <article class="value-card">
+          <span class="value-no">02</span><span class="value-icon">↗</span>
+          <h3>끝까지 실행합니다</h3>
+          <p>아이디어를 문서에만 남겨두지 않고, 작게라도 빠르게 만들고 검증합니다.</p>
+        </article>
+        <article class="value-card">
+          <span class="value-no">03</span><span class="value-icon">✦</span>
+          <h3>함께 성장합니다</h3>
+          <p>솔직한 소통과 존중을 바탕으로 팀의 가능성을 더 크게 만듭니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="story" class="wrap reveal">
+      <div class="story-panel">
+        <div class="section-index">02 / MY STORY</div>
+        <h2>배우고, 시도하고,<br>성장해 온 기록.</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="year">2024 — NOW</div>
+            <div><h3>프로덕트 기획자 · ABC Company</h3><p>사용자 리서치부터 서비스 전략, 출시와 개선까지 제품의 전 과정을 리드하고 있습니다.</p></div>
+          </article>
+          <article class="timeline-item">
+            <div class="year">2022 — 2024</div>
+            <div><h3>서비스 운영 · XYZ Studio</h3><p>고객 데이터를 기반으로 운영 프로세스를 개선하고 신규 프로젝트를 기획했습니다.</p></div>
+          </article>
+          <article class="timeline-item">
+            <div class="year">2018 — 2022</div>
+            <div><h3>경영학 전공 · 한국대학교</h3><p>비즈니스의 기본을 배우며 다양한 팀 프로젝트와 창업 동아리 활동을 경험했습니다.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="wrap reveal">
+      <div class="section-head">
+        <div class="section-index">03 / SKILLS</div>
+        <div>
+          <h2>생각을 현실로 만드는<br>도구와 역량.</h2>
+          <p class="lead">새로운 도구를 빠르게 익히고, 목적에 맞는 방법을 선택합니다.</p>
+        </div>
+      </div>
+      <div class="skills" aria-label="보유 역량">
+        <span class="skill">서비스 기획</span><span class="skill">프로젝트 관리</span>
+        <span class="skill">사용자 리서치</span><span class="skill">데이터 분석</span>
+        <span class="skill">UX Writing</span><span class="skill">Figma</span>
+        <span class="skill">Notion</span><span class="skill">협업과 커뮤니케이션</span>
+      </div>
+    </section>
+
+    <section id="contact" class="contact wrap reveal">
+      <div class="contact-box">
+        <h2>재미있는 일을 함께<br>만들어 볼까요?</h2>
+        <p>프로젝트 제안, 커피챗, 가벼운 인사 모두 환영합니다. 편하게 연락해 주세요.</p>
+        <a class="btn" href="mailto:hello@example.com">hello@example.com <span>↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span>© <span id="year"></span> Kim Minjun. All rights reserved.</span>
+    <span>Designed with curiosity & care.</span>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuButton.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.textContent = open ? '×' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.textContent = '☰';
+    }));
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
